@@ -11,6 +11,13 @@
                         </button>
                     </a>
                 </div>
+                <div align="right" class="mb-3">
+                    <a href="">
+                        <button class="btn btn-info">
+                            Listeyi Yenile
+                        </button>
+                    </a>
+                </div>
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
                         <div class="app-card-body">

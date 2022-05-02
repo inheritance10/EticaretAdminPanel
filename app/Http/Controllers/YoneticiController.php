@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class PersonelController extends Controller
+class YoneticiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,10 @@ class PersonelController extends Controller
      */
     public function index()
     {
-        $personel['personel'] = User::where('rol' ,'=',0)->get();
-        return view('backend.personeller.personel',compact('personel'));
+        $yonetici['yonetici'] = User::where('rol' , "=" ,1)->get();
+        return view('backend.yoneticiler.yonetici',compact('yonetici'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +26,7 @@ class PersonelController extends Controller
      */
     public function create()
     {
-        return view('backend.personeller.personelAdd');
+        return view('backend.yoneticiler.yoneticiAdd');
     }
 
     /**
@@ -36,44 +37,42 @@ class PersonelController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
            'name' => 'required',
            'email' => 'required|email',
            'password' => 'required|min:6'
         ]);
 
-        if($request->has('personel_file')){
+
+        if($request->hasFile('yonetici_file')){
             $request->validate([
-               'personel_file' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+               'yonetici_file' => 'required|image|mimes:jpg,jpeg,png'
             ]);
 
-            $file_name = uniqid().'.'.$request->personel_file->getClientOriginalExtension();
-            $request->personel_file->move(public_path('/personel_img'),$file_name);
-
-            $personel = User::create([
-                'name' => $request->name,
+            $file_name = uniqid().'.'.$request->yonetici_file->getClientOriginalExtension();
+            $request->yonetici_file->move(public_path('/yonetici_img'),$file_name);
+            $yonetici = User::create([
+               'name' =>  $request->name,
                 'email' => $request->email,
-                'rol' => 0,
                 'file_name' => $file_name,
-                'password' => Hash::make($request->password)
+                'rol' => 1,
+                'password' => $request->password
             ]);
         }else{
-            $personel = User::create([
-                'name' => $request->name,
+            $yonetici = User::create([
+                'name' =>  $request->name,
                 'email' => $request->email,
-                'rol' => 0,
-                'password' => Hash::make($request->password)
+                'rol' => 1,
+                'file_name' => null,
+                'password' => $request->password
             ]);
         }
 
-        if($personel){
-            return redirect(route('personel.index'))
-                ->with('success','Personel kaydı başarıyla tamamlandı');
+        if($yonetici){
+            return redirect(route('yonetici.index'))->with('success','Yönetici kaydı başarıyla tamamlandı');
         }
 
-        return back()->with('error','Personel kaydı başarısız');
-
+        return back()->with('error','Kayıt başarısız');
     }
 
     /**
@@ -84,7 +83,7 @@ class PersonelController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -95,8 +94,8 @@ class PersonelController extends Controller
      */
     public function edit($id)
     {
-        $person = User::where('id',$id)->first();
-        return view('backend.personeller.personelUpdate',compact('person'));
+        $yonetici = User::where('id',$id)->first();
+        return view('backend.yoneticiler.yoneticiUpdate',compact('yonetici'));
     }
 
     /**
@@ -108,71 +107,67 @@ class PersonelController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
            'name' => 'required',
-           'email' => 'required|email',
+           'email' => 'required|email'
         ]);
 
-        if($request->hasFile('personel_file')){
+        if($request->hasFile('yonetici_file')){
             $request->validate([
-               'personel_file' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+                'yonetici_file' => 'required|image|mimes:jpg,jpeg,png|max:2048'
             ]);
 
-            $file_name = uniqid().'.'.$request->personel_file->getClientOriginalExtension();
-            $request->personel_file->move(public_path('/personel_img'),$file_name);
-
+            $file_name = uniqid().'.'.$request->yonetici_file->getClientOriginalExtension();
+            $request->yonetici_file->move(public_path('/yonetici_img'),$file_name);
 
             if(intval(strlen($request->password)) == 0){
-                $person = User::where('id',$id)
+                $yonetici = User::where('id',$id)
                     ->update([
                         'name' => $request->name,
                         'email' => $request->email,
                         'file_name' => $file_name,
-                        'rol' => 0
+                        'rol' => 1
                     ]);
             }else{
-                $request->validate([
-                    'password' => 'required|min:6'
-                ]);
-
-                $person = User::where('id',$id)
+                $yonetici = User::where('id',$id)
                     ->update([
                         'name' => $request->name,
                         'email' => $request->email,
                         'file_name' => $file_name,
-                        'password' => Hash::make($request->password),
-                        'rol' => 0
+                        'rol' => 1,
+                        'password' => Hash::make($request->password)
                     ]);
             }
 
-            $path = 'personel_img/'.$request->old_file;
+            $path = 'yonetici_img/'.$request->old_file;
             if(file_exists($path)){
                 @unlink(public_path($path));
             }
-
         }else{
             if(intval(strlen($request->password)) == 0){
-                $person = User::where('id',$id)
+                $yonetici = User::where('id',$id)
                     ->update([
                         'name' => $request->name,
                         'email' => $request->email,
-                        'rol' => 0
+                        'rol' => 1
                     ]);
             }else{
-                $person = User::where('id',$id)
+                $yonetici = User::where('id',$id)
                     ->update([
                         'name' => $request->name,
                         'email' => $request->email,
-                        'password' => Hash::make($request->password),
-                        'rol' => 0
+                        'rol' => 1,
+                        'password' => Hash::make($request->password)
                     ]);
             }
         }
-        if($person){
-            return redirect(route('personel.index'))->with('success','Personel Kaydı Başarıyla Güncellendi');
+
+        if($yonetici){
+            return redirect(route('yonetici.index'))->with('success','Yönetici kaydı başarıyla güncellendi');
         }
+
         return back()->with('error','Düzenleme işlemi başarısız');
+
     }
 
     /**
@@ -185,5 +180,4 @@ class PersonelController extends Controller
     {
         //
     }
-
 }

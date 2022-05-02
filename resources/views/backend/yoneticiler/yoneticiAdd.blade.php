@@ -1,15 +1,15 @@
 @extends('backend.layout')
 
-@section('content-title','Personel Kayıt')
+@section('content-title','Yönetici Kayıt')
 
 @section('content')
     <div class="auth-form-container text-start" style="width: 50%;">
         <div align="right">
-            <a href="{{route('personel.index')}}">
+            <a href="{{route('yonetici.index')}}">
                 <button class='btn btn-success'>Geri Dön</button>
             </a>
         </div>
-        <form class="auth-form login-form" method="post" action="{{route('personel.store')}}" enctype="multipart/form-data">
+        <form class="auth-form login-form" method="post" action="{{route('yonetici.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label>Ad Soyad</label>
@@ -20,13 +20,13 @@
                 <input name="email" type="email" class="form-control">
             </div><!--//form-group-->
             <div class="email mb-3">
-                <label>Şifre Güncelle</label>
+                <label>Şifre</label>
                 <input name="password" type="password" class="form-control">
             </div><!--//form-group-->
 
             <div class="mb-3">
                 <label>Görsel</label>
-                <input name="personel_file" type="file" class="form-control">
+                <input name="yonetici_file" type="file" class="form-control">
             </div><!--//form-group-->
 
             <div class="text-center">
@@ -51,5 +51,6 @@
 
 @section('js')
 @endsection
+
 
 

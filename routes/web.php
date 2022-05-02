@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PersonelController;
+use App\Http\Controllers\YoneticiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,9 @@ Route::middleware(['admin'])->group(function (){
 
        //PERSONEL ROUTE
        Route::resource('personel',PersonelController::class);
+
+       //YÖNETİCİ ROUTE
+       Route::resource('yonetici',YoneticiController::class);
 
    });
 });
