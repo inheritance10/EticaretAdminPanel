@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PersonelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,38 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
+//Admin giriş kontrol route
+Route::prefix('admin')->group(function (){
+    Route::get('/login',[AuthController::class,'login'])
+        ->name('admin.login');
+
+    Route::post('login-authenticate',[AuthController::class,'authenticate'])
+        ->name('login.authenticate');
+
+    Route::get('/dashboard',[AuthController::class,'index'])
+        ->name('admin.index')->middleware('admin');
+
+    Route::get('/logout',[AuthController::class,'logout'])
+        ->name('admin.logout');
+});
+
+
+
+Route::middleware(['admin'])->group(function (){
+   Route::prefix('admin')->group(function (){
+
+       //PERSONEL ROUTE
+       Route::resource('personel',PersonelController::class);
+
+   });
+});
+
+
+
+require __DIR__.'/auth.php';
