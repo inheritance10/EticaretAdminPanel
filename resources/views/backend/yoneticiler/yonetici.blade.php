@@ -51,13 +51,15 @@
                                             </button>
                                         </a>
                                     </td>
-                                    <td class="cell">
-                                        <a href="">
-                                            <button class="btn btn-danger">
-                                                Sil
+                                    <form method="post" action="{{route('yonetici.destroy',$yonetici->id)}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <td class="cell">
+                                            <button type="submit" class="btn btn-danger">
+                                               Sil
                                             </button>
-                                        </a>
-                                    </td>
+                                        </td>
+                                    </form>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -68,6 +70,17 @@
             </div><!--//app-card-->
         </div><!--//tab-pane-->
     </div><!--//tab-content-->
+
+
+    <script>
+        @if(session()->has('delete'))
+        alertify.success('{{session('delete')}}')
+        @endif
+
+        @if(session()->has('deleteError'))
+        alertify.error('{{session('deleteError')}}')
+        @endif
+    </script>
 
 @endsection
 

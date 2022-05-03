@@ -56,7 +56,7 @@ class YoneticiController extends Controller
                 'email' => $request->email,
                 'file_name' => $file_name,
                 'rol' => 1,
-                'password' => $request->password
+                'password' => Hash::make($request->password)
             ]);
         }else{
             $yonetici = User::create([
@@ -64,7 +64,7 @@ class YoneticiController extends Controller
                 'email' => $request->email,
                 'rol' => 1,
                 'file_name' => null,
-                'password' => $request->password
+                'password' => Hash::make($request->password)
             ]);
         }
 
@@ -178,6 +178,10 @@ class YoneticiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $yonetici = User::find($id);
+        if($yonetici->delete()){
+            return back()->with('delete','Personel Kaydı Başarıyla Silindi');
+        }
+        return back()->with('deleteError','Personel Kaydı  Silinemedi');
     }
 }

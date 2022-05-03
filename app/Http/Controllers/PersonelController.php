@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use http\Exception\BadConversionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -183,7 +184,11 @@ class PersonelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $personel = User::find($id);
+        if($personel->delete()){
+            return back()->with('delete','Personel Kaydı Başarıyla Silindi');
+        }
+        return back()->with('deleteError','Personel Kaydı  Silinemedi');
     }
 
 }

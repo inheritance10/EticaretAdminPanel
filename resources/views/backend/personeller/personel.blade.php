@@ -51,13 +51,15 @@
                                                 </button>
                                             </a>
                                         </td>
+                                        <form method="post" action="{{route('personel.destroy',$person->id)}}">
+                                            @csrf
+                                            @method('DELETE')
                                         <td class="cell">
-                                            <a href="">
-                                                <button class="btn btn-danger">
-                                                    Sil
-                                                </button>
-                                            </a>
+                                            <button type="submit" class="btn btn-danger">
+                                                Sil
+                                            </button>
                                         </td>
+                                        </form>
                                     </tr>
                                     @endforeach
                                     </tbody>
@@ -69,7 +71,19 @@
                 </div><!--//tab-pane-->
             </div><!--//tab-content-->
 
+
+            <script>
+                @if(session()->has('delete'))
+                alertify.success('{{session('delete')}}')
+                @endif
+
+                @if(session()->has('deleteError'))
+                alertify.error('{{session('deleteError')}}')
+                @endif
+            </script>
+
 @endsection
+
 
 
 

@@ -1,6 +1,6 @@
 @extends('backend.layout')
 
-@section('content-title','Personel Kaydı Düzenle')
+@section('content-title','Yönetici Kaydı Düzenle')
 
 @section('content')
     <div class="auth-form-container text-start" style="width: 50%;">
