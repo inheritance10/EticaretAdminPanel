@@ -11,13 +11,6 @@
                         </button>
                     </a>
                 </div>
-                <div align="right" class="mb-3">
-                    <a href="">
-                        <button class="btn btn-info">
-                            Listeyi Yenile
-                        </button>
-                    </a>
-                </div>
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
                         <div class="app-card-body">
@@ -38,7 +31,7 @@
                                         <td class="cell">{{$person->name}}</td>
                                         <td class="cell"><span class="truncate">{{$person->email}}</span></td>
                                         <td class="cell">
-                                            <a href="">
+                                            <a href="{{route('gorev.edit',$person->id)}}">
                                                 <button class="btn btn-secondary">
                                                     Görev Ver
                                                 </button>
@@ -47,7 +40,7 @@
                                         <td class="cell">
                                             <a href="{{route('personel.edit',$person->id)}}">
                                                 <button class="btn btn-warning">
-                                                    Düzenle
+                                                   Personel Düzenle
                                                 </button>
                                             </a>
                                         </td>
@@ -56,7 +49,7 @@
                                             @method('DELETE')
                                         <td class="cell">
                                             <button type="submit" class="btn btn-danger">
-                                                Sil
+                                                Personel Sil
                                             </button>
                                         </td>
                                         </form>

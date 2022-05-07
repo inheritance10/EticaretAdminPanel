@@ -29,21 +29,15 @@
                                 <th class="cell">Email</th>
                                 <th class="cell"></th>
                                 <th class="cell"></th>
-                                <th class="cell"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($yonetici['yonetici'] as $yonetici)
                                 <tr>
-                                    <td class="cell">{{$yonetici->name}}</td>
-                                    <td class="cell"><span class="truncate">{{$yonetici->email}}</span></td>
                                     <td class="cell">
-                                        <a href="">
-                                            <button class="btn btn-secondary">
-                                                Görev Ver
-                                            </button>
-                                        </a>
+                                            {{$yonetici->name}}
                                     </td>
+                                    <td class="cell"><span class="truncate">{{$yonetici->email}}</span></td>
                                     <td class="cell">
                                         <a href="{{route('yonetici.edit',$yonetici->id)}}">
                                             <button class="btn btn-warning">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\YoneticiController;
+use App\Http\Controllers\PersonelTaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +41,6 @@ Route::prefix('admin')->group(function (){
 });
 
 
-
 Route::middleware(['admin'])->group(function (){
    Route::prefix('admin')->group(function (){
 
@@ -49,6 +49,9 @@ Route::middleware(['admin'])->group(function (){
 
        //YÖNETİCİ ROUTE
        Route::resource('yonetici',YoneticiController::class);
+
+       //GÖREVLER ROUTE
+       Route::resource('gorev',PersonelTaskController::class);
 
    });
 });
