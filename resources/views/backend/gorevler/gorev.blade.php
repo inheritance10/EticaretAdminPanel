@@ -2,6 +2,16 @@
 @section('content-title','Personel Görev Listesi')
 @section('content')
     <div class="tab-content" id="orders-table-tab-content">
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == 1)
+            <div align="right">
+                <a href="{{route('personel.index')}}">
+                    <button class="btn btn-secondary">
+                        Görev Oluştur
+                    </button>
+                </a>
+            </div>
+        @endif
+        <H3 class="mb-3">Görevlerim</H3>
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
             <div class="app-card app-card-orders-table shadow-sm mb-5">
                 <div class="app-card-body">
@@ -26,6 +36,15 @@
                                         <td class="cell"><span class="truncate">{{$person->gorev_adi}}</span></td>
                                         <td class="cell"><span class="truncate">{{$person->gorev_aciklama}}</span></td>
                                         <td class="cell"><span class="truncate">{{  $person->gorev_durumu == 0 ? 'Tamamlanmamış' : 'Tamamlandı' }}</span></td>
+                                        <form method="post" action="{{route('gorev.destroy',$person->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <td class="cell">
+                                                <button type="submit" class="btn btn-success">
+                                                    Teslim Et
+                                                </button>
+                                            </td>
+                                        </form>
                                     </tr>
                                 @endforeach
                             @elseif(\Illuminate\Support\Facades\Auth::user()->rol == 1)

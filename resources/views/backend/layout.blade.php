@@ -210,7 +210,13 @@
 		  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
 		</svg>
 						         </span>
-                                <span class="nav-link-text">Görevlerim</span>
+                                <span class="nav-link-text">Görevlerim
+                                    @if(\Illuminate\Support\Facades\Auth::user()->gorev_varmi == 1)
+                                        <div align="left">
+                                            !!!Görev var
+                                        </div>
+                                    @endif
+                                </span>
                             </a><!--//nav-link-->
                         </li><!--//nav-item-->
                     @endif

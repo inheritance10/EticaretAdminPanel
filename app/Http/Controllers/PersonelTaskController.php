@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isEmpty;
 
 class PersonelTaskController extends Controller
 {
@@ -136,12 +137,15 @@ class PersonelTaskController extends Controller
            ->where('name',$request->name)
            ->get();*/
 
-        $task = Task::where('user_id',$id)->first();
+        $task = Task::where('id',$id)->first();
 
-        $user_id = Task::where('id',$task->id)->first();
+        //$user_id = Task::where('id',$task->id)->first();
         if($task->delete()){
-            if($task->id == null){
-                User::where('id',$user_id->user_id)->update([
+            $task->update([
+               'gorev_durumu' => 1
+            ]);
+            if(isEmpty($task)){
+                User::where('id',$task->user_id)->update([
                     'gorev_varmi' => 0
                 ]);
             }
