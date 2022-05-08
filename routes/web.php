@@ -50,8 +50,12 @@ Route::middleware(['admin'])->group(function (){
        //YÖNETİCİ ROUTE
        Route::resource('yonetici',YoneticiController::class);
 
-       //GÖREVLER ROUTE
+       //TASK ROUTE
        Route::resource('gorev',PersonelTaskController::class);
+
+       //PRUDUCT ROUTE
+
+
 
    });
 });
