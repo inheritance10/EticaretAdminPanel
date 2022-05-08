@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        /*$personel = User::leftJoin('tasks', 'tasks.user_id', '=', 'users.id')
+          ->where('name',$request->name)
+          ->get();*/
+
+        $products = Product::Join('kategoris','kategoris.urun_id','=','products.id')
+        ->get();
+
+        return view('backend.urunler.urun',compact('products'));
     }
 
     /**
@@ -23,7 +31,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::Join('kategoris','kategoris.urun_id','=','products.id')
+            ->get();
+        return view('backend.urunler.urunAdd',compact('products'));
     }
 
     /**

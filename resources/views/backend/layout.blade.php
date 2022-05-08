@@ -11,6 +11,10 @@
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
 
+    <!--ÜRÜN EKLEME SAYFASI CSS-->
+    <link rel="stylesheet" href="/backend/assets/css/urunAdd.css">
+    <!--FONTAWESOME ICONS-->
+    <script src="https://kit.fontawesome.com/124a6ba1f7.js" crossorigin="anonymous"></script>
     <!-- JQUERY-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -193,7 +197,7 @@
                             </a><!--//nav-link-->
                             <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link" href="">Ürünler Listesi</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="{{route('product.index')}}">Ürünler Listesi</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="">Ürün Ekle</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="signup.html">Stok Kontrol</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="">Ayarlar</a></li>

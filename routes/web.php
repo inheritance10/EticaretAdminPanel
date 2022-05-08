@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\YoneticiController;
 use App\Http\Controllers\PersonelTaskController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,7 +54,8 @@ Route::middleware(['admin'])->group(function (){
        //TASK ROUTE
        Route::resource('gorev',PersonelTaskController::class);
 
-       //PRUDUCT ROUTE
+       //PRODUCT ROUTE
+       Route::resource('product',ProductController::class);
 
 
 
